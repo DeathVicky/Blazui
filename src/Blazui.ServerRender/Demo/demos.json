@@ -29,6 +29,18 @@
     ]
   },
   {
+    "name": "table",
+    "demos": [
+      {
+        "title": "基础用法",
+        "name": "Table",
+        "files": [
+          "BasicTable.razor"
+        ]
+      }
+    ]
+  },
+  {
     "name": "button",
     "demos": [
       {
