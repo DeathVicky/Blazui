@@ -27,7 +27,7 @@ spec:
         app: blazui
     spec:
       containers:
-        - image: 'registry-vpc.cn-shanghai.aliyuncs.com/codecity/blazui:latest'
+        - image: 'registry-vpc.cn-shanghai.aliyuncs.com/wzyuchen/blazui:latest'
           imagePullPolicy: Always
           name: blazui
           ports:
