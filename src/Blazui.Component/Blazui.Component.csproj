@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\element\fix.css" />
+    <None Include="wwwroot\element\fonts\element-icons.ttf" />
+    <None Include="wwwroot\element\fonts\element-icons.woff" />
+    <None Include="wwwroot\element\fonts\icomoon.eot" />
+    <None Include="wwwroot\element\fonts\icomoon.svg" />
+    <None Include="wwwroot\element\fonts\icomoon.ttf" />
+    <None Include="wwwroot\element\fonts\icomoon.woff" />
+    <None Include="wwwroot\element\index.css" />
+    <None Include="wwwroot\js\dom.js" />
+  </ItemGroup>
+
+
+</Project>

@@ -1,0 +1,15 @@
+﻿@using Microsoft.AspNetCore.Components.RenderTree;
+<div role="group" aria-label="checkbox-group" class="el-checkbox-group">
+    @ChildContent
+</div>
+@functions{
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public int? Min { get; set; }
+
+    [Parameter]
+    public int? Max { get; set; }
+}

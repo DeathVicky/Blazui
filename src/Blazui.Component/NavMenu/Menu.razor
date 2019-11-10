@@ -1,0 +1,53 @@
+﻿@inherits MenuContainer
+<CascadingValue Value=this>
+    <CascadingValue Value="Options">
+        <ul role="menubar" class="@modeClass el-menu">@ChildContent</ul>
+    </CascadingValue>
+</CascadingValue>
+
+@functions {
+
+    [Parameter]
+    public MenuMode Mode { get; set; } = MenuMode.Vertical;
+    private string modeClass;
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public bool Collapse { get; set; } = false;
+
+    [Parameter]
+    public string BackgroundColor { get; set; }
+
+    [Parameter]
+    public string TextColor { get; set; }
+
+    [Parameter]
+    public string ActiveTextColor { get; set; } = "#409EFF";
+
+    [Parameter]
+    public string HoverColor { get; set; } = "#ecf5ff";
+
+    [Parameter]
+    public string DefaultActive { get; set; }
+
+    private MenuOptions Options { get; set; }
+
+    protected override void OnInitialized()
+    {
+        modeClass = $"el-menu--{Mode.ToString().ToLower()}";
+
+        Options = new MenuOptions
+        {
+            BackgroundColor = BackgroundColor,
+            ActiveTextColor = ActiveTextColor,
+            TextColor = TextColor,
+            DefaultActiveIndex = DefaultActive,
+            HoverColor = HoverColor,
+            Mode = Mode.ToString().ToLower()
+        };
+
+        base.OnInitialized();
+    }
+}

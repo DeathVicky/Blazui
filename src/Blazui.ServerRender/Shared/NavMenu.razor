@@ -1,34 +1,35 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">Blazui.ServerRender</a>
-    <button class="navbar-toggler" @onclick="ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</div>
-
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <ul class="nav flex-column">
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
-        </li>
-    </ul>
-</div>
+﻿<style>
+    .sidebar .el-menu {
+        border: 0;
+    }
+</style>
+<Menu Mode="@MenuMode.Vertical" DefaultActive="0">
+    @*<MenuItem Route="">快速上手</MenuItem>*@
+    <MenuItem Route="button">Button 按钮</MenuItem>
+    <MenuItem Route="input">Input 输入框</MenuItem>
+    <MenuItem Route="radio">Radio 单选框</MenuItem>
+    <MenuItem Route="checkbox">Checkbox 多选框</MenuItem>
+    <MenuItem Route="select">Select 选择器</MenuItem>
+    <MenuItem Route="switch">Switch</MenuItem>
+    <MenuItem Route="radio">Radio 单选框</MenuItem>
+    <MenuItem Route="menu">NavMenu 导航菜单</MenuItem>
+    <MenuItem Route="tabs">Tabs 标签页</MenuItem>
+</Menu>
 
 @code {
     bool collapseNavMenu = true;
 
     string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    [Inject]
+    NavigationManager NavigationManager { get; set; }
+    protected override void OnInitialized()
+    {
+        if (new Uri(NavigationManager.Uri).LocalPath == "/")
+        {
+            NavigationManager.NavigateTo("button");
+        }
+    }
 
     void ToggleNavMenu()
     {

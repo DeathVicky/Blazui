@@ -1,0 +1,7 @@
+﻿@using  Blazui.Component.EventArgs
+@inherits CheckBoxBase<TModel>
+@typeparam TModel
+@foreach (var item in models)
+{
+    <BSimpleCheckBox @bind-Status="@item.Status" OnStatusChanged="OnInnerStatusChanged" IsDisabled="item.IsDisabled" TrueValue="@item.TrueValue" FalseValue="@item.FalseValue">@item.Label</BSimpleCheckBox>
+}

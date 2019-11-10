@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Blazui.ServerRender.Data;
+using Blazui.Component;
 
 namespace Blazui.ServerRender
 {
@@ -28,6 +29,8 @@ namespace Blazui.ServerRender
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddHttpClient();
+            services.AddBlazuiServices();
             services.AddSingleton<WeatherForecastService>();
         }
 

@@ -1,0 +1,4 @@
+﻿@inherits DynamicRenderBase
+<BCheckBox For="@Values" IsChecked="@((item)=>SelectedValues.Contains(item))"></BCheckBox>
+<br />
+<BCheckBox For="@Values" SelectedItems="@SelectedValues"></BCheckBox>

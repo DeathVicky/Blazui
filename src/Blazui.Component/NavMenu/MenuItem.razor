@@ -1,0 +1,88 @@
+﻿@implements IMenuItem
+@inject NavigationManager  navigationManager
+<li role="menuitem" tabindex="0"
+    @onclick="OnClick"
+    @onmouseover="OnOver"
+    @onmouseout="OnOut"
+    class="el-menu-item @(active?"is-active":"")"
+    style="background-color:@backgroundColor;color:@textColor; border-bottom-color:@borderColor;">
+    @ChildContent
+</li>
+@code {
+
+    [Parameter]
+    public string Index { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public bool Disabled { get; set; } = false;
+
+    [Parameter]
+    public string Route { get; set; }
+
+    [CascadingParameter]
+    public MenuContainer Container { get; set; }
+
+    [CascadingParameter]
+    public MenuOptions Options { get; set; }
+
+    private string textColor;
+    private string backgroundColor;
+    private string borderColor;
+
+    private bool active { get; set; }
+
+    public void Active()
+    {
+        active = true;
+        textColor = Options.ActiveTextColor;
+        borderColor = Options.ActiveTextColor;
+        backgroundColor = Options.HoverColor;
+
+    }
+    public void DeActive()
+    {
+        active = false;
+        textColor = Options.TextColor;
+        borderColor = "transparent";
+        backgroundColor = Options.BackgroundColor;
+        StateHasChanged();
+    }
+
+
+    protected override void OnInitialized()
+    {
+        backgroundColor = Options.BackgroundColor;
+        textColor = Options.TextColor;
+
+        if (Options.DefaultActiveIndex == Index)
+        {
+            Container.ActiveItem(this);
+        }
+
+        base.OnInitialized();
+    }
+
+    public void OnOver()
+    {
+        //todo: 颜色值经过计算而得
+        backgroundColor = Options.HoverColor;
+    }
+
+    public void OnOut()
+    {
+        backgroundColor = active ? Options.HoverColor : Options.BackgroundColor;
+    }
+
+    public void OnClick()
+    {
+        if (!string.IsNullOrEmpty(Route))
+        {
+            navigationManager.NavigateTo(Route);
+        }
+
+        Container.ActiveItem(this);
+    }
+}
