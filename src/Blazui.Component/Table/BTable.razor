@@ -1,46 +1,43 @@
 ﻿@inherits BTableBase<TRow>
 @typeparam TRow
-<div class="el-table el-table--fit el-table--enable-row-hover el-table--enable-row-transition">
-    <div class="el-table__header-wrapper">
-        <table cellspacing="0" cellpadding="0" border="0" class="el-table__header">
-            <colgroup>
-                @if (Headers != null)
-                    for (int i = 1; i <= Headers.Count; i++)
+@if (Headers.Any())
+{
+    <div class="el-table el-table--fit el-table--enable-row-hover el-table--enable-row-transition">
+        <div class="el-table__header-wrapper">
+            <table cellspacing="0" cellpadding="0" border="0" class="el-table__header">
+                <colgroup>
+                    @for (int i = 1; i <= Headers.Count; i++)
                     {
                         var header = Headers.ElementAt(i - 1);
                         <col name="el-table_1_column_@i" width="@header.Width" />
                     }
-                <col name="gutter" width="0" />
-            </colgroup>
-            <thead class="has-gutter">
-                <tr class="">
-                    @if (Headers != null)
-                        for (int i = 1; i <= Headers.Count; i++)
+                    <col name="gutter" width="0" />
+                </colgroup>
+                <thead class="has-gutter">
+                    <tr class="">
+                        @for (int i = 1; i <= Headers.Count; i++)
                         {
                             var header = Headers.ElementAt(i - 1);
                             <th colspan="1" rowspan="1" class="el-table_1_column_@i     is-leaf">
                                 <div class="cell">@header.Text</div>
                             </th>
                         }
-                    <th class="gutter" style="width: 0px; display: none;"></th>
-                </tr>
-            </thead>
-        </table>
-    </div>
-    <div class="el-table__body-wrapper is-scrolling-none">
-        <table cellspacing="0" cellpadding="0" border="0" class="el-table__body">
-            <colgroup>
-                @if (Headers != null)
-                    for (int i = 1; i <= Headers.Count; i++)
+                        <th class="gutter" style="width: 0px; display: none;"></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="el-table__body-wrapper is-scrolling-none">
+            <table cellspacing="0" cellpadding="0" border="0" class="el-table__body">
+                <colgroup>
+                    @for (int i = 1; i <= Headers.Count; i++)
                     {
                         var header = Headers.ElementAt(i - 1);
                         <col name="el-table_1_column_@i" width="@header.Width" />
                     }
-            </colgroup>
-            <tbody>
-
-                @if (Rows != null)
-                    foreach (var row in Rows)
+                </colgroup>
+                <tbody>
+                    @foreach (var row in Rows)
                     {
                         <tr class="el-table__row">
                             <td rowspan="1" colspan="1" class="el-table_1_column_1  ">
@@ -54,8 +51,15 @@
                             </td>
                         </tr>
                     }
-            </tbody>
-        </table><!----><!---->
-    </div><!----><!----><!----><!---->
-    <div class="el-table__column-resize-proxy" style="display: none;"></div>
-</div>
+                </tbody>
+            </table><!----><!---->
+        </div><!----><!----><!----><!---->
+        <div class="el-table__column-resize-proxy" style="display: none;"></div>
+    </div>
+}
+else
+{
+    <CascadingValue Value="@this">
+        @ChildContent
+    </CascadingValue>
+}
