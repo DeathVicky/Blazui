@@ -14,7 +14,7 @@ http://47.103.163.62:9000/button
 
 #### 使用说明
 
-拉取代码，用 VS2019 打开，直接启动 Blazui.ServerRender 项目
+拉取代码，用 VS2019 打开，直接启动 Blazui.ServerRender 项目，组件残缺，暂时没有 nuget 包
 
 #### 参与贡献
 
