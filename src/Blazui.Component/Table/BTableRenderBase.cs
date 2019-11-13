@@ -22,7 +22,7 @@ namespace Blazui.Component.Table
         {
             get
             {
-                return Table.Rows;
+                return Table.DataSource;
             }
         }
     }

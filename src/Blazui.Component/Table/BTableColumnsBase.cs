@@ -20,7 +20,7 @@ namespace Blazui.Component.Table
             var columnConfig = new TableHeader<TRow>
             {
                 Property = column.Property == null ? string.Empty : GetPropertyName(column.Property),
-                Eval = column.Property == null ? null : Expression.Lambda<Func<TRow, object>>(column.Property, Expression.Parameter(typeof(TRow))).Compile(),
+                Eval = column.Property == null ? null : column.Property.Compile(),
                 Text = column.Text,
                 Width = column.Width
             };

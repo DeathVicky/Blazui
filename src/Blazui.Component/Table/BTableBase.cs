@@ -13,11 +13,22 @@ namespace Blazui.Component.Table
         private bool rendered = false;
 
         [Parameter]
-        public List<TRow> Rows { get; set; }
+        public List<TRow> DataSource { get; set; }
 
         [Parameter]
         public RenderFragment ChildContent { get; set; }
 
+        /// <summary>
+        /// 启用斑马纹
+        /// </summary>
+        [Parameter]
+        public bool IsStripe { get; set; }
+
+        /// <summary>
+        /// 启用边框
+        /// </summary>
+        [Parameter]
+        public bool IsBordered { get; set; }
         protected override void OnInitialized()
         {
             base.OnInitialized();
