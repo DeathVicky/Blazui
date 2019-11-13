@@ -2,8 +2,30 @@
 @typeparam TRow
 @if (Headers.Any())
 {
-    <div class="el-table el-table--fit @(IsStripe ? "el-table--striped":string.Empty) @(IsBordered ? "el-table--border":string.Empty) el-table--enable-row-hover el-table--enable-row-transition">
-        <div class="el-table__header-wrapper">
+    var styles = new List<string>();
+    var tableClsList = new List<string>();
+    tableClsList.Add("el-table");
+    tableClsList.Add("el-table--fit");
+    tableClsList.Add("el-table--enable-row-hover");
+    tableClsList.Add("el-table--enable-row-transition");
+    if (IsStripe)
+    {
+        tableClsList.Add("el-table--striped");
+    }
+    if (IsBordered)
+    {
+        tableClsList.Add("el-table--border");
+    }
+
+    styles.Add("width:100%");
+    if (Height > 0)
+    {
+        tableClsList.Add("el-table--scrollable-y");
+        styles.Add("height:" + Height + "px");
+    }
+
+    <div style="@string.Join(";",styles)" class="@string.Join(" ",tableClsList)">
+        <div class="el-table__header-wrapper" @ref="headerElement">
             <table cellspacing="0" cellpadding="0" border="0" class="el-table__header">
                 <colgroup>
                     @for (int i = 1; i <= Headers.Count; i++)
@@ -27,7 +49,15 @@
                 </thead>
             </table>
         </div>
-        <div class="el-table__body-wrapper is-scrolling-none">
+
+        @{
+            var bodyStyleList = new List<string>();
+            if (Height > 0)
+            {
+                bodyStyleList.Add("height:" + (Height - headerHeight) + "px");
+            }
+        }
+        <div class="el-table__body-wrapper is-scrolling-none" style="@string.Join(";", bodyStyleList)">
             <table cellspacing="0" cellpadding="0" border="0" class="el-table__body">
                 <colgroup>
                     @for (int i = 1; i <= Headers.Count; i++)

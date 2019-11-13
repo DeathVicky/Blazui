@@ -24,6 +24,10 @@ namespace Blazui.Component.Dom
         {
             return await jSRuntime.InvokeAsync<int>("getClientWidth", elementReference);
         }
+        public async Task<int> GetClientHeightAsync()
+        {
+            return await jSRuntime.InvokeAsync<int>("getClientHeight", elementReference);
+        }
 
         public async Task<int> GetOffsetLeftAsync()
         {

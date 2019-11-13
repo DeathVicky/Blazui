@@ -80,8 +80,7 @@ namespace Blazui.Component.CheckBox
             ModelItemIsSimpleType = type.IsValueType || type.IsPrimitive || type == typeof(string);
             if (ModelItemIsSimpleType)
             {
-                models = new List<CheckBoxOption>
-                    ();
+                models = new List<CheckBoxOption>();
                 foreach (var item in For)
                 {
                     models.Add(ConvertModelItem(item));

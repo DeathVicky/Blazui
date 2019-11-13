@@ -57,6 +57,15 @@
           "BasicTableBase.cs",
           "TestData.cs"
         ]
+      },
+      {
+        "title": "固定表头",
+        "name": "Table",
+        "files": [
+          "FixHeaderTable.razor",
+          "BasicTableBase.cs",
+          "TestData.cs"
+        ]
       }
     ]
   },

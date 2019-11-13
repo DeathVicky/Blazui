@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazui.Component.Dom;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
+using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +11,22 @@ namespace Blazui.Component.Table
 {
     public class BTableBase<TRow> : ComponentBase
     {
+        protected ElementReference headerElement;
         public List<TableHeader<TRow>> Headers { get; set; } = new List<TableHeader<TRow>>();
-        private bool rendered = false;
+        private bool requireRender = true;
+        protected int headerHeight = 49;
 
         [Parameter]
         public List<TRow> DataSource { get; set; }
 
+        [Inject]
+        private IJSRuntime jsRunTime { get; set; }
+
         [Parameter]
         public RenderFragment ChildContent { get; set; }
+
+        [Parameter]
+        public int Height { get; set; }
 
         /// <summary>
         /// 启用斑马纹
@@ -31,7 +41,6 @@ namespace Blazui.Component.Table
         public bool IsBordered { get; set; }
         protected override void OnInitialized()
         {
-            base.OnInitialized();
             //Headers = typeof(TRow).GetProperties().Select(x => new
             //{
             //    TableColumn = (TableColumnAttribute)x.GetCustomAttributes(typeof(TableColumnAttribute), true).FirstOrDefault(),
@@ -45,14 +54,14 @@ namespace Blazui.Component.Table
             //}).ToArray();
         }
 
-        protected override void OnAfterRender(bool firstRender)
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if (rendered)
+            if (requireRender)
             {
+                StateHasChanged();
+                requireRender = false;
                 return;
             }
-            rendered = true;
-            StateHasChanged();
         }
     }
 }

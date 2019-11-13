@@ -9,6 +9,7 @@ namespace Blazui.ServerRender.Demo.Table
     public class BasicTableBase : ComponentBase
     {
         protected List<TestData> Datas = new List<TestData>();
+        protected List<TestData> LargeDatas = new List<TestData>();
 
         protected override void OnInitialized()
         {
@@ -30,6 +31,11 @@ namespace Blazui.ServerRender.Demo.Table
                 Name = "张三3",
                 Time = DateTime.Now
             });
+            LargeDatas.AddRange(Datas);
+            LargeDatas.AddRange(Datas);
+            LargeDatas.AddRange(Datas);
+            LargeDatas.AddRange(Datas);
+            LargeDatas.AddRange(Datas);
         }
     }
 }
