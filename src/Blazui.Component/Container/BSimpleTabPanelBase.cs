@@ -87,7 +87,7 @@ namespace Blazui.Component.Container
 
         public event Func<ITab, Task> OnRenderCompletedAsync;
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+        protected override async void OnAfterRender(bool firstRender)
         {
             if (OnRenderCompletedAsync != null)
             {

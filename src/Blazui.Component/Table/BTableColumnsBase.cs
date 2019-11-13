@@ -22,7 +22,8 @@ namespace Blazui.Component.Table
                 Property = column.Property == null ? string.Empty : GetPropertyName(column.Property),
                 Eval = column.Property == null ? null : column.Property.Compile(),
                 Text = column.Text,
-                Width = column.Width
+                Width = column.Width,
+                IsCheckBox = column.IsCheckBox
             };
             Table.Headers.Add(columnConfig);
         }

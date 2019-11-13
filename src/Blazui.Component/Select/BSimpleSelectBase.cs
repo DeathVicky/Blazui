@@ -166,7 +166,7 @@ namespace Blazui.Component.Select
             await ToggleAsync();
         }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+        protected override async void OnAfterRender(bool firstRender)
         {
             if (popup == null)
             {

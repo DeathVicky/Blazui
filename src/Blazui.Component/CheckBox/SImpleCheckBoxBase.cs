@@ -61,6 +61,10 @@ namespace Blazui.Component.CheckBox
             args.OldValue = oldValue;
             args.NewValue = newValue;
             OnStatusChanged?.Invoke(args);
+            if (StatusChanged.HasDelegate)
+            {
+                StatusChanged.InvokeAsync(newValue.Status).Wait();
+            }
         }
 
         [Parameter]

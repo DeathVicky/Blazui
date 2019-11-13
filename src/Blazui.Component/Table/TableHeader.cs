@@ -12,5 +12,6 @@ namespace Blazui.Component.Table
         public int? Width { get; set; }
         public string Property { get; set; }
         public Func<TRow, object> Eval { get; set; }
+        public bool IsCheckBox { get; set; }
     }
 }

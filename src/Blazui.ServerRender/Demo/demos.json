@@ -66,6 +66,15 @@
           "BasicTableBase.cs",
           "TestData.cs"
         ]
+      },
+      {
+        "title": "复选框表格",
+        "name": "Table",
+        "files": [
+          "CheckBoxTable.razor",
+          "BasicTableBase.cs",
+          "TestData.cs"
+        ]
       }
     ]
   },

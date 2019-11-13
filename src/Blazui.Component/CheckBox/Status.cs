@@ -7,8 +7,8 @@ namespace Blazui.Component.CheckBox
 {
     public enum Status
     {
-        Checked,
         UnChecked,
+        Checked,
         Indeterminate
     }
 }

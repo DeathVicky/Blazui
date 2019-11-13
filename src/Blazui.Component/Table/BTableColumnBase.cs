@@ -9,8 +9,9 @@ namespace Blazui.Component.Table
 {
     public class BTableColumnBase<TRow> : ComponentBase
     {
+        internal virtual bool IsCheckBox { get; set; }
         [Parameter]
-        public int? Width { get; set; }
+        public virtual int? Width { get; set; }
 
         [Parameter]
         public Expression<Func<TRow, object>> Property { get; set; }

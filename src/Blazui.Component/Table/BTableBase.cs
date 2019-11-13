@@ -1,4 +1,6 @@
-﻿using Blazui.Component.Dom;
+﻿using Blazui.Component.CheckBox;
+using Blazui.Component.Dom;
+using Blazui.Component.EventArgs;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.JSInterop;
@@ -17,7 +19,12 @@ namespace Blazui.Component.Table
         protected int headerHeight = 49;
 
         [Parameter]
-        public List<TRow> DataSource { get; set; }
+        public List<TRow> DataSource { get; set; } = new List<TRow>();
+
+        [Parameter]
+        public HashSet<TRow> SelectedRows { get; set; } = new HashSet<TRow>();
+
+        protected Status selectAllStatus;
 
         [Inject]
         private IJSRuntime jsRunTime { get; set; }
@@ -39,22 +46,8 @@ namespace Blazui.Component.Table
         /// </summary>
         [Parameter]
         public bool IsBordered { get; set; }
-        protected override void OnInitialized()
-        {
-            //Headers = typeof(TRow).GetProperties().Select(x => new
-            //{
-            //    TableColumn = (TableColumnAttribute)x.GetCustomAttributes(typeof(TableColumnAttribute), true).FirstOrDefault(),
-            //    Row = x
-            //}).Where(x => x.TableColumn != null)
-            //.Select(x => new TableHeader()
-            //{
-            //    Property = x.Row.Name,
-            //    Text = x.TableColumn.Text,
-            //    Width = x.TableColumn.Width
-            //}).ToArray();
-        }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+        protected override void OnAfterRender(bool firstRender)
         {
             if (requireRender)
             {
@@ -62,6 +55,53 @@ namespace Blazui.Component.Table
                 requireRender = false;
                 return;
             }
+        }
+
+        protected override void OnParametersSet()
+        {
+            RefreshSelectAllStatus();
+        }
+
+        void RefreshSelectAllStatus()
+        {
+            if (DataSource.Count == 0 || SelectedRows.Count == 0)
+            {
+                selectAllStatus = Status.UnChecked;
+            }
+            else if (DataSource.Count > SelectedRows.Count)
+            {
+                selectAllStatus = Status.Indeterminate;
+            }
+            else
+            {
+                selectAllStatus = Status.Checked;
+            }
+        }
+
+        protected void ChangeAllStatus(Status status)
+        {
+            if (status == Status.Checked)
+            {
+                SelectedRows = new HashSet<TRow>(DataSource);
+            }
+            else
+            {
+                SelectedRows = new HashSet<TRow>();
+            }
+            RefreshSelectAllStatus();
+        }
+
+        protected void ChangeRowStatus(Status status, TRow row)
+        {
+            if (status == Status.Checked)
+            {
+                SelectedRows.Add(row);
+            }
+            else
+            {
+                SelectedRows.Remove(row);
+            }
+            RefreshSelectAllStatus();
         }
     }
 }

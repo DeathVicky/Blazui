@@ -35,7 +35,7 @@ namespace Blazui.Component.Popup
             await ComponentManager.RegisterPopupComponentAsync(this);
         }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+        protected override async void OnAfterRender(bool firstRender)
         {
             //Console.WriteLine("OnAfterRenderAsync");
             if (stopRender)

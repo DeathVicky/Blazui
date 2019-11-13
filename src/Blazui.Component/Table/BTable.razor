@@ -31,7 +31,12 @@
                     @for (int i = 1; i <= Headers.Count; i++)
                     {
                         var header = Headers.ElementAt(i - 1);
-                        <col name="el-table_1_column_@i" width="@header.Width" />
+                        var width = header.Width;
+                        if (header.IsCheckBox)
+                        {
+                            width = 55;
+                        }
+                        <col name="el-table_1_column_@i" width="@width" />
                     }
                     <col name="gutter" width="0" />
                 </colgroup>
@@ -41,7 +46,16 @@
                         {
                             var header = Headers.ElementAt(i - 1);
                             <th colspan="1" rowspan="1" class="el-table_1_column_@i     is-leaf">
-                                <div class="cell">@header.Text</div>
+                                <div class="cell">
+                                    @if (header.IsCheckBox)
+                                    {
+                                        <BSimpleCheckBox Status="selectAllStatus" StatusChanged="ChangeAllStatus"></BSimpleCheckBox>
+                                    }
+                                    else
+                                    {
+                                        @header.Text
+                                    }
+                                </div>
                             </th>
                         }
                         <th class="gutter" style="width: 0px; display: none;"></th>
@@ -63,7 +77,12 @@
                     @for (int i = 1; i <= Headers.Count; i++)
                     {
                         var header = Headers.ElementAt(i - 1);
-                        <col name="el-table_1_column_@i" width="@header.Width" />
+                        var width = header.Width;
+                        if (header.IsCheckBox)
+                        {
+                            width = 55;
+                        }
+                        <col name="el-table_1_column_@i" width="@width" />
                     }
                 </colgroup>
                 <tbody>
@@ -81,7 +100,16 @@
                             {
                                 var header = Headers.ElementAt(j - 1);
                                 <td rowspan="1" colspan="1" class="el-table_1_column_@j  ">
-                                    <div class="cell">@header.Eval(row)</div>
+                                    <div class="cell">
+                                        @if (header.IsCheckBox)
+                                        {
+                                            <BSimpleCheckBox Status="SelectedRows.Contains(row) ? Status.Checked: Status.UnChecked" StatusChanged="(status=>ChangeRowStatus(status,row))"></BSimpleCheckBox>
+                                        }
+                                        else
+                                        {
+                                            @header.Eval(row)
+                                        }
+                                    </div>
                                 </td>
                             }
                         </tr>
